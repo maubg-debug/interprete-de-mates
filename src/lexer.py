@@ -1,4 +1,4 @@
-from tokens import Token, TokenType
+from src.tokens import Token, TokenType
 
 
 WHITESPACE = ' \n\t'

@@ -1,19 +1,8 @@
-from lexer import Lexer
-from parser_ import Parser
-from interpreter import Interpreter
+from src import resolver
 
 while True:
     try:
         texto = input("Calculadora: ")
-        lexer = Lexer(texto)
-        tokens = lexer.generar_tokens()
-        # print(list(tokens))
-        parser = Parser(tokens)
-        tree = parser.parse()
-        print(tree)
-        if not tree:
-            continue
-        value = Interpreter().visit(tree)
-        print(value)
+        resolver(texto)
     except Exception as e:
         print(e)

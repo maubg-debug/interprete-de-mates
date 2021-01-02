@@ -1,7 +1,7 @@
 # Es parser_.py porque hay un modulo llamado parser
 
-from tokens import TokenType
-from nodes import *
+from src.tokens import TokenType
+from src.nodes import *
 
 class Parser:
     def __init__(self, tokens):

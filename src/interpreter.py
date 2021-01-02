@@ -1,5 +1,5 @@
-from nodes import *
-from values import Number
+from src.nodes import *
+from src.values import Number
 
 class Interpreter:
     def visit(self, node):

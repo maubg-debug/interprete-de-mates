@@ -40,4 +40,4 @@
 * Tokens `+ - NUMEROS / * ( )`
 
 # TODO:
-* Añadir expresiones acpazes de ser resueltas con algebra
+* Algebra

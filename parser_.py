@@ -33,8 +33,10 @@ class Parser:
 
         while self.current_token != None and self.current_token.type in (TokenType.PLUS, TokenType.MINUS):
             if self.current_token.type == TokenType.PLUS:
-                AddNode(result, self.term())
+                self.advance()
+                result = AddNode(result, self.term())
             elif self.current_token.type == TokenType.MINUS:
+                self.advance()
                 SubtractNode(result, self.term())
 
         return result
@@ -44,17 +46,37 @@ class Parser:
 
         while self.current_token != None and self.current_token.type in (TokenType.MULTIPLY, TokenType.DIVIDE):
             if self.current_token.type == TokenType.MULTIPLY:
-                MultiplyNode(result, self.factor())
+                self.advance()
+                result = MultiplyNode(result, self.factor())
             elif self.current_token.type == TokenType.DIVIDE:
-                DivideNode(result, self.factor())
+                self.advance()
+                result = DivideNode(result, self.factor())
 
         return result
 
     def factor(self):
         token = self.current_token
 
-        if token.type == TokenType.NUMBER:
+        if token.type == TokenType.LPAREN:
+            self.advance()
+            result = self.expr()
+
+            if self.current_token.type != TokenType.RPAREN:
+                self.error()
+            
+            self.advance()
+            return result
+
+        elif token.type == TokenType.NUMBER:
             self.advance()
             return NumberNode(token.value)
+    
+        elif token.type == TokenType.PLUS:
+            self.advance()
+            return PlusNode(self.factor())
+
+        elif token.type == TokenType.MINUS:
+            self.advance()
+            return MinusNode(self.factor())
 
         self.error()

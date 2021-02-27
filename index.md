@@ -1,42 +1,43 @@
-# mauweb
-* Un web framework para python
+# interprete-de-mates
+ Un  robot que te resuelve 1 + 2
 
-# ¿Como se usa?
+![img](./img/img1.png)
 
-* Primero instalatelo
+# ¿Como funciona?
+
+* Ejemplo (`1 + 2 * 6`)
+
+* Primero creamos un generador con los tokens.
+    * Y nos devolveria los tipos de los tokens gracias al `lexer`
     ```
-    pip install MauWeb
-    ```
-* Crea un pequeño set up
-    ```python
-    from mauweb import MauWeb, Path
-    from mauweb.response import HttpResponse, RenderResponse, JsonResponse, FileResponse
-
-    app = MauWeb() # Inicializacion
-    app.set_static('/static/', '.') # Se usaria asi (https://github.com/maubg-debug/mauweb/blob/main/examples/ejemplo.html#L4)
-
-    def print_received(request): # La funcion que quieras. Parametro :: request (Puedes hacer cosas como si es un 'POST' o 'GET'). Haz debuging
-
-        print(request.query_string)
-        return RenderResponse( # Todos se pueden importar como pone ariba
-            request, # ¡Siempre!
-            'ejemplo.html', # En este caso el archivo
-            None # Context
-        )
-            
-    routes = [
-        Path('/', print_received), # Añade todos los routers
-        # Para mas seguridad pon (Path('/awd/', print_received)) y Path('/algo', print_received)
-        # Para un slash y sin.
-    ]
-
-    app.set_routes(routes) # Añade los routers
-
-    if __name__=='__main__': # venga ya
-        app.run(app) # Correr. Puedes poner como argumentos (ademas de app que es abligatorio) :: El puerto, el host
+    Calculadora: 1 + 2 * 6
+    [NUMBER:1.0, PLUS, NUMBER:2.0, MULTIPLY, NUMBER:6.0]
     ```
 
-    * Mas ejemplos en [github](https://github.com/maubg-debug/mauweb/tree/main/examples)
+* Luego el `parser` nos devuelve un arbol
+    ```
+    Calculadora: 1 + 2 * 6
+    (2.0+5.0)
+    ```
 
-# Licencia
-* Miralo en nuestro [github](https://github.com/maubg-debug/mauweb/blob/main/LICENSE.md)
+* Por ultimo nos da el resultado
+    ```
+    Calculadora: 1 + 2 * 6
+    7.0
+    ```
+
+# ¿Para que sirve esto?
+
+* Esto es un ejemplo muy basico para la gente que quiera aprender a como hacer un lenguage de programaciones
+* Tambien para ver como los ordenadores traducen la data
+* Y de mas
+
+# Mas cosas
+* Esta maquina respeta las reglas de BIDMAS (BODMAS)
+    * Puedes poner parentesis `()` para que el interprete aga primero esa expresion
+* No da un error si intentas dividir por 0
+    * EJ: `1 / 0`
+* Tokens `+ - NUMEROS / * ( )`
+
+# TODO:
+* Algebra

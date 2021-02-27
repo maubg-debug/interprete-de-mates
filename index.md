@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# mauweb
+* Un web framework para python
 
-You can use the [editor on GitHub](https://github.com/maubg-debug/interprete-de-mates/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# ¿Como se usa?
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* Primero instalatelo
+    ```
+    pip install MauWeb
+    ```
+* Crea un pequeño set up
+    ```python
+    from mauweb import MauWeb, Path
+    from mauweb.response import HttpResponse, RenderResponse, JsonResponse, FileResponse
 
-### Markdown
+    app = MauWeb() # Inicializacion
+    app.set_static('/static/', '.') # Se usaria asi (https://github.com/maubg-debug/mauweb/blob/main/examples/ejemplo.html#L4)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    def print_received(request): # La funcion que quieras. Parametro :: request (Puedes hacer cosas como si es un 'POST' o 'GET'). Haz debuging
 
-```markdown
-Syntax highlighted code block
+        print(request.query_string)
+        return RenderResponse( # Todos se pueden importar como pone ariba
+            request, # ¡Siempre!
+            'ejemplo.html', # En este caso el archivo
+            None # Context
+        )
+            
+    routes = [
+        Path('/', print_received), # Añade todos los routers
+        # Para mas seguridad pon (Path('/awd/', print_received)) y Path('/algo', print_received)
+        # Para un slash y sin.
+    ]
 
-# Header 1
-## Header 2
-### Header 3
+    app.set_routes(routes) # Añade los routers
 
-- Bulleted
-- List
+    if __name__=='__main__': # venga ya
+        app.run(app) # Correr. Puedes poner como argumentos (ademas de app que es abligatorio) :: El puerto, el host
+    ```
 
-1. Numbered
-2. List
+    * Mas ejemplos en [github](https://github.com/maubg-debug/mauweb/tree/main/examples)
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/maubg-debug/interprete-de-mates/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Licencia
+* Miralo en nuestro [github](https://github.com/maubg-debug/mauweb/blob/main/LICENSE.md)

@@ -1,7 +1,7 @@
 # interprete-de-mates
  Un  robot que te resuelve 1 + 2
 
-![img](./img/img1.png)
+![img](https://raw.githubusercontent.com/maubg-debug/interprete-de-mates/main/img/img1.png)
 
 # ¿Como funciona?
 
